@@ -16,6 +16,62 @@ $(document).ready(function () {
         $('#nav-menu').toggleClass('active');
     });
 
+    // HERO AUTO-SCROLLING 5-IMAGE CAROUSEL
+    let currentSlide = 0;
+    let slides = $('.hero-slide');
+    let dots = $('.slider-dot');
+    let slideCount = slides.length;
+    let autoSlideTimer = null;
+
+    function goToSlide(index) {
+        if (index < 0) index = slideCount - 1;
+        if (index >= slideCount) index = 0;
+        currentSlide = index;
+
+        slides.removeClass('active');
+        dots.removeClass('active');
+
+        let targetSlide = $(slides[currentSlide]);
+        targetSlide.addClass('active');
+        $(dots[currentSlide]).addClass('active');
+    }
+
+    function startAutoSlide() {
+        stopAutoSlide();
+        autoSlideTimer = setInterval(function () {
+            goToSlide(currentSlide + 1);
+        }, 3200);
+    }
+
+    function stopAutoSlide() {
+        if (autoSlideTimer) {
+            clearInterval(autoSlideTimer);
+            autoSlideTimer = null;
+        }
+    }
+
+    $('#slider-next').on('click', function () {
+        goToSlide(currentSlide + 1);
+        startAutoSlide();
+    });
+
+    $('#slider-prev').on('click', function () {
+        goToSlide(currentSlide - 1);
+        startAutoSlide();
+    });
+
+    $('.slider-dot').on('click', function () {
+        let idx = parseInt($(this).data('index')) || 0;
+        goToSlide(idx);
+        startAutoSlide();
+    });
+
+    $('#hero-slider-container').on('mouseenter', stopAutoSlide).on('mouseleave', startAutoSlide);
+
+    if (slides.length > 0) {
+        startAutoSlide();
+    }
+
     // Quantity Increment / Decrement
     $('.qty-btn.minus').on('click', function () {
         let currentVal = parseInt($('#quantity-input').val()) || 1;
@@ -71,32 +127,98 @@ $(document).ready(function () {
         $('#payment_method').val(targetTab === 'paypal-tab' ? 'paypal' : 'bank_transfer');
     });
 
-    // Smooth Scroll to Booking Form
-    $('.scroll-to-booking').on('click', function (e) {
-        e.preventDefault();
-        let target = $('#booking-section');
-        if (target.length) {
-            $('html, body').animate({
-                scrollTop: target.offset().top - 80
-            }, 600);
+    // ===== PREMIUM MULTI-STEP BOOKING MODAL =====
+    let currentStep = 1;
+
+    function openBookingModal() {
+        $('#booking-modal-overlay').addClass('active');
+        $('body').addClass('modal-open');
+        goToStep(1);
+        // Lazy-load PayPal SDK only on first open
+        if (!window._paypalLoaded && !$('#paypal-sdk-script').length) {
+            window._paypalLoaded = true;
+            let s = document.createElement('script');
+            s.id = 'paypal-sdk-script';
+            s.src = 'https://www.paypal.com/sdk/js?client-id=sb&currency=GBP&components=buttons';
+            s.async = true;
+            document.body.appendChild(s);
         }
+    }
+
+    function closeBookingModal() {
+        $('#booking-modal-overlay').removeClass('active');
+        $('body').removeClass('modal-open');
+    }
+
+    function goToStep(step) {
+        currentStep = step;
+        // Update panels
+        $('.bm-step-panel').removeClass('active');
+        $('#step-panel-' + step).addClass('active');
+        // Update step indicators
+        $('.bm-step').each(function () {
+            let s = parseInt($(this).data('step'));
+            $(this).removeClass('active done');
+            if (s === step) $(this).addClass('active');
+            if (s < step)  $(this).addClass('done');
+        });
+        // Update step lines
+        $('.bm-step-line').each(function (i) {
+            $(this).toggleClass('done', i + 1 < step);
+        });
+    }
+
+    // Open modal on Book Now click
+    $(document).on('click', '.scroll-to-booking, [href="#booking-section"]', function (e) {
+        e.preventDefault();
+        openBookingModal();
     });
 
-    // UK Postcode Formatting & Live Validation
+    // Close modal
+    $('#modal-close-btn').on('click', closeBookingModal);
+    $('#booking-modal-overlay').on('click', function (e) {
+        if ($(e.target).is('#booking-modal-overlay') || $(e.target).hasClass('bm-overlay')) closeBookingModal();
+    });
+    $(document).on('keydown', function (e) {
+        if (e.key === 'Escape') closeBookingModal();
+    });
+
+    // Step navigation
+    $('#step1-next').on('click', function () {
+        if (!$('#customer_name').val().trim() || !$('#mobile').val().trim() || !$('#email').val().trim()) {
+            alert('Please fill in all required fields (Name, Mobile, Email).');
+            return;
+        }
+        goToStep(2);
+    });
+    $('#step2-back').on('click', function () { goToStep(1); });
+    $('#step2-next').on('click', function () {
+        if (!$('#address_line_1').val().trim() || !$('#city').val().trim() || !$('#postcode').val().trim()) {
+            alert('Please fill in Address Line 1, City and Postcode.');
+            return;
+        }
+        goToStep(3);
+    });
+    $('#step3-back').on('click', function () { goToStep(2); });
+
+    // Payment tab switching (new bm-pay-tab)
+    $(document).on('click', '.bm-pay-tab', function () {
+        let tab = $(this).data('tab');
+        $('.bm-pay-tab').removeClass('active');
+        $(this).addClass('active');
+        $('.bm-pay-panel').removeClass('active');
+        $('#' + tab).addClass('active');
+        $('#payment_method').val(tab === 'paypal-tab' ? 'paypal' : 'bank_transfer');
+    });
+
+    // Postcode uppercase
     $('#postcode').on('blur keyup', function () {
-        let raw = $(this).val().toUpperCase();
-        $(this).val(raw);
+        $(this).val($(this).val().toUpperCase());
     });
 
-    // FAQ Accordion Toggle
-    $('.faq-question').on('click', function () {
-        let parent = $(this).closest('.faq-item');
-        parent.toggleClass('active');
-        parent.find('.faq-answer').slideToggle(300);
-    });
 
-    // Bank Transfer Booking Form Submission
-    $('#bank-transfer-form').on('submit', function (e) {
+    // Bank Transfer Booking Submit (button click in modal)
+    $(document).on('click', '#btn-submit-bank', function (e) {
         e.preventDefault();
         
         // Front-end validation
@@ -273,3 +395,17 @@ $(document).ready(function () {
         getShippingCharge: () => shippingCharge
     };
 });
+
+// Product Gallery Image Switcher
+window.switchProductImage = function (src, el) {
+    let mainImg = $('#main-product-img');
+    if (mainImg.length) {
+        mainImg.css('opacity', '0.3');
+        setTimeout(() => {
+            mainImg.attr('src', src);
+            mainImg.css('opacity', '1');
+        }, 150);
+    }
+    $('.thumb-img').removeClass('active');
+    $(el).addClass('active');
+};
