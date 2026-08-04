@@ -370,10 +370,16 @@ img {
 
 .hero-subtitle {
   font-size: 1.15rem;
-  color: var(--color-text-dark);
-  margin-bottom: 28px;
-  max-width: 580px;
-  opacity: 0.9;
+  color: #382A2A;
+  margin-bottom: 20px;
+  max-width: 600px;
+  line-height: 1.7;
+  font-weight: 500;
+}
+
+.hero-subtitle strong {
+  color: var(--color-maroon);
+  font-weight: 800;
 }
 
 /* Luxury Hero Booking Card */

@@ -75,9 +75,8 @@ $bank_acc_num     = escape_output($settings['bank_account_number'] ?? '83920144'
                     <span class="hero-tag">&#10024; Ganesh Chaturthi 2026 Special</span>
                     <h1 class="hero-title">Bring Home <span>Bappa</span> This Ganesh Chaturthi</h1>
                     <p class="hero-subtitle">
-                        Book your Ganesh Statue with VK Logistics and get it conveniently delivered to your doorstep anywhere in the UK.
+                        Welcome <strong>Lord Ganesha</strong> into your home with joy &amp; devotion. Handcrafted eco-friendly Ganesh statues carefully packaged and delivered safely to your doorstep anywhere across the United Kingdom.
                     </p>
-
                     <!-- Luxury Hero Booking Card -->
                     <div class="hero-booking-card">
                         <div class="hbc-badge-row">
