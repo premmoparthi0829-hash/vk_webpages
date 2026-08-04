@@ -179,8 +179,12 @@ $(document).ready(function () {
     $('#booking-modal-overlay').on('click', function (e) {
         if ($(e.target).is('#booking-modal-overlay') || $(e.target).hasClass('bm-overlay')) closeBookingModal();
     });
+
+    // Universal Escape key listener
     $(document).on('keydown', function (e) {
-        if (e.key === 'Escape') closeBookingModal();
+        if (e.key === 'Escape') {
+            closeBookingModal();
+        }
     });
 
     // Step navigation

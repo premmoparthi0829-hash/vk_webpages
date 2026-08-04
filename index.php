@@ -90,23 +90,20 @@ $bank_acc_num     = escape_output($settings['bank_account_number'] ?? '83920144'
                         <a href="#" class="btn-saffron btn-pulse scroll-to-booking">
                             &#127983; BOOK YOUR GANESH
                         </a>
-                        <a href="#" class="btn-outline-maroon" id="how-it-works-btn">
-                            How It Works
-                        </a>
                     </div>
 
                     <div class="hero-trust-list">
                         <div class="trust-item">
-                            <div class="check-icon">&#10003;</div> Simple Booking
+                            <div class="check-icon">&#10003;</div> Eco Clay Ganesh Idol
                         </div>
                         <div class="trust-item">
-                            <div class="check-icon">&#10003;</div> Secure Payment
+                            <div class="check-icon">&#10003;</div> Mukut &amp; Ornaments Kit
                         </div>
                         <div class="trust-item">
-                            <div class="check-icon">&#10003;</div> UK Delivery
+                            <div class="check-icon">&#10003;</div> Safe Protective Box
                         </div>
                         <div class="trust-item">
-                            <div class="check-icon">&#10003;</div> Booking Reference
+                            <div class="check-icon">&#10003;</div> Express UK Delivery
                         </div>
                     </div>
                 </div>
@@ -441,6 +438,8 @@ $bank_acc_num     = escape_output($settings['bank_account_number'] ?? '83920144'
 
         </div>
     </div>
+
+
 
 
     <!-- Minimal Bottom Bar -->
