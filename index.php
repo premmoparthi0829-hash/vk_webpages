@@ -78,17 +78,23 @@ $bank_acc_num     = escape_output($settings['bank_account_number'] ?? '83920144'
                         Book your Ganesh Statue with VK Logistics and get it conveniently delivered to your doorstep anywhere in the UK.
                     </p>
 
-                    <div class="price-badge-box diya-glow">
-                        <div>
-                            <div class="price-main">ONLY &pound;14.99</div>
-                            <div class="price-sub">+ Shipping</div>
+                    <!-- Luxury Hero Booking Card -->
+                    <div class="hero-booking-card">
+                        <div class="hbc-badge-row">
+                            <span class="hbc-offer-tag">&#10024; Festive Offer</span>
+                            <span class="hbc-uk-tag">UK Doorstep Delivery</span>
                         </div>
-                        <div class="uk-badge">UK Delivery Only</div>
-                    </div>
-
-                    <div class="hero-actions">
-                        <a href="#" class="btn-saffron btn-pulse scroll-to-booking">
-                            &#127983; BOOK YOUR GANESH
+                        <div class="hbc-price-row">
+                            <div class="hbc-price-main">
+                                <span class="hbc-currency">&pound;</span>14.99
+                            </div>
+                            <div class="hbc-price-details">
+                                <div class="hbc-shipping">+ &pound;3.99 UK Shipping</div>
+                                <div class="hbc-unit-sub">Complete Statue Package</div>
+                            </div>
+                        </div>
+                        <a href="#" class="hbc-btn scroll-to-booking">
+                            &#127983; BOOK YOUR GANESH NOW
                         </a>
                     </div>
 

@@ -376,53 +376,116 @@ img {
   opacity: 0.9;
 }
 
-/* Price Badge Box */
-.price-badge-box {
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
-  background: #FFFFFF;
-  padding: 14px 24px;
-  border-radius: var(--radius-md);
-  border: 2px solid var(--color-gold);
-  box-shadow: var(--shadow-gold);
+/* Luxury Hero Booking Card */
+.hero-booking-card {
+  background: linear-gradient(145deg, var(--color-maroon-dark) 0%, #5E0E1E 50%, var(--color-maroon) 100%);
+  border: 1.5px solid rgba(212, 175, 55, 0.45);
+  border-radius: 20px;
+  padding: 22px 24px;
+  box-shadow: 0 16px 40px rgba(74, 11, 23, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
   margin-bottom: 30px;
+  position: relative;
+  overflow: hidden;
+  max-width: 480px;
 }
 
-.price-main {
-  font-family: var(--font-heading);
-  font-size: 2.25rem;
+.hbc-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.hbc-offer-tag {
+  font-size: 0.75rem;
   font-weight: 800;
-  color: var(--color-maroon);
-  line-height: 1;
-}
-
-.price-sub {
-  font-size: 0.875rem;
-  color: var(--color-saffron);
-  font-weight: 700;
+  color: var(--color-gold-light);
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  padding: 4px 12px;
+  border-radius: 20px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
-.uk-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(74, 11, 23, 0.05);
-  color: var(--color-maroon);
-  padding: 6px 12px;
-  border-radius: var(--radius-sm);
+.hbc-uk-tag {
+  font-size: 0.75rem;
   font-weight: 700;
-  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.85);
 }
 
-.hero-actions {
+.hbc-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.hbc-price-main {
+  font-family: var(--font-heading);
+  font-size: 2.75rem;
+  font-weight: 900;
+  color: var(--color-gold-light);
+  line-height: 1;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hbc-currency {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-right: 2px;
+}
+
+.hbc-price-details {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.hbc-shipping {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-saffron-light);
+}
+
+.hbc-unit-sub {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.hbc-btn {
   display: flex;
   align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 36px;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 15px 24px;
+  background: linear-gradient(135deg, var(--color-saffron) 0%, #FF7043 100%);
+  color: #FFFFFF !important;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 800;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(230, 81, 0, 0.4);
+  transition: all 0.25s ease;
+  letter-spacing: 0.5px;
+  border: none;
+  cursor: pointer;
+  animation: pulseBtn 2.5s infinite;
+}
+
+.hbc-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(230, 81, 0, 0.55);
+  background: linear-gradient(135deg, #FF7043 0%, var(--color-saffron) 100%);
+  color: #FFFFFF !important;
+}
+
+@keyframes pulseBtn {
+  0%, 100% { box-shadow: 0 8px 24px rgba(230, 81, 0, 0.4); }
+  50%      { box-shadow: 0 8px 32px rgba(230, 81, 0, 0.7); }
 }
 
 /* Trust bullet points */
@@ -1373,19 +1436,13 @@ img {
     max-width: 560px;
     margin: 0 auto 28px;
   }
-  .price-badge-box {
+  .hero-booking-card {
     order: 5;
-    margin: 0 auto 24px;
-    display: inline-flex;
-  }
-  .hero-actions {
-    order: 6;
-    justify-content: center;
+    margin: 0 auto 28px;
     width: 100%;
-    margin-bottom: 28px;
   }
   .hero-trust-list {
-    order: 7;
+    order: 6;
     justify-content: center;
     width: 100%;
   }
@@ -1425,21 +1482,15 @@ img {
   .hero-title { font-size: 2rem; margin-bottom: 12px; }
   .hero-subtitle { font-size: 0.98rem; margin-bottom: 20px; }
 
-  /* Price badge */
-  .price-badge-box {
-    flex-direction: row;
+  /* Hero Booking Card Mobile */
+  .hero-booking-card {
+    padding: 18px 20px;
+    margin-bottom: 24px;
     width: 100%;
     max-width: 100%;
-    padding: 12px 18px;
-    gap: 12px;
-    margin-bottom: 22px;
   }
-  .price-main { font-size: 1.8rem; }
-  .price-sub  { font-size: 0.78rem; }
-
-  /* CTA buttons */
-  .hero-actions { flex-direction: column; width: 100%; gap: 12px; margin-bottom: 24px; }
-  .btn-saffron, .btn-outline-maroon { width: 100%; justify-content: center; text-align: center; }
+  .hbc-price-main { font-size: 2.2rem; }
+  .hbc-currency { font-size: 1.4rem; }
 
   /* Trust list */
   .hero-trust-list {
@@ -1494,9 +1545,10 @@ img {
   .hero-subtitle { font-size: 0.95rem; }
   .hero-tag { font-size: 0.74rem; }
 
-  /* Price box */
-  .price-badge-box { flex-wrap: wrap; gap: 8px; }
-  .price-main { font-size: 1.6rem; }
+  /* Hero Booking Card Small Mobile */
+  .hero-booking-card { padding: 16px 18px; }
+  .hbc-price-main { font-size: 2rem; }
+  .hbc-btn { font-size: 0.95rem; padding: 13px 18px; }
 
   /* Slider */
   .hero-slider-wrapper { height: 250px; }
